@@ -1,5 +1,6 @@
 <?php
 session_start();
+include "configure.php";
 if(!isset($_SESSION['id']))
 {
 	header("location:index.php");
@@ -241,7 +242,16 @@ $(document).ready(function()
 					<div class="panel body">
 						<div class="row">
 						
-					<div class="col-md-8"><p>Thank you Litto...!</p><p> your orderd product of ------------- [transaction code : xxxxxxxxxx xxxx] will be deliverd to the below address on 19/feb/2019</p></div>
+					<div class="col-md-8"><p><?php 
+					$u_id=$_SESSION['id']; 
+					$sql="select * from user_info where user_id='$u_id'";
+					$res=mysqli_query($conn,$sql);
+					if($row=$res->fetch_assoc())
+					{
+						$name=$row['first_name'];
+						echo "Thank You ".$name;
+					}
+					?></p><p> your orderd product of ------------- [transaction code : xxxxxxxxxx xxxx] will be deliverd to the below address on 19/feb/2019</p></div>
 					<div class="col-md-4"><div style="float:left;"><a href="index.php" class="btn btn-success" >Continue Purchase</a></div></div>
 					</div>
 						<div class="panel footer"></div>
